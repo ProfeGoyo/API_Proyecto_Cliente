@@ -1,0 +1,11 @@
+# Ignorar librerías de Node
+node_modules/
+
+# Ignorar los datos físicos de la base de datos de Docker
+db_data/
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+*.txt

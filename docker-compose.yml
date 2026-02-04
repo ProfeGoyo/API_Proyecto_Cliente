@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:  # <--- ESTA LÍNEA ES OBLIGATORIA
+  db:
+    image: postgres:15
+    container_name: db_alumnos
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: escuela_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    build: ./node_app
+    container_name: api_alumnos
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: admin
+      DB_PASSWORD: password123
+      DB_NAME: escuela_db
+      DB_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
